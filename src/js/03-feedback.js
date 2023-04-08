@@ -1,4 +1,3 @@
-
 import throttle from "lodash.throttle";
 
 const formEl = document.querySelector('.feedback-form');
@@ -8,11 +7,11 @@ formEl.addEventListener('input', throttle(onInput, 500));
 
 function onInput (event) {
     data[event.target.name] = event.target.value;
-    localStorage.setItem(FFS_KEY, JSON.stringify(data))
+    sessionStorage.setItem(FFS_KEY, JSON.stringify(data))
 }
 
-if (localStorage.getItem(FFS_KEY)) {
-    const {email, message} = JSON.parse(localStorage.getItem(FFS_KEY));
+if (sessionStorage.getItem(FFS_KEY)) {
+    const {email, message} = JSON.parse(sessionStorage.getItem(FFS_KEY));
     formEl.email.value = email;
     formEl.message.value = message;
     data.email = email;
@@ -27,6 +26,6 @@ function onSubmit(event) {
     console.log(data);
     if (formEl.email.value === '' || formEl.message.value === '') {
     return alert('Будь ласка, заповніть всі поля!');}
-    localStorage.removeItem(FFS_KEY);
+    sessionStorage.removeItem(FFS_KEY);
     formEl.reset()
 }
